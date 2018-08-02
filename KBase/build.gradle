@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //support
+    api rootProject.ext.support["support-v4"]
+    api rootProject.ext.support["appcompat-v7"]
+    //rxjava
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+    //rx管理View的生命周期
+    api rootProject.ext.dependencies.rxlifecycle
+    api rootProject.ext.dependencies["rxlifecycle-components"]
+    //rxbinding
+    api rootProject.ext.dependencies.rxbinding
+    //rx权限请求
+    api rootProject.ext.dependencies.rxpermissions
+    //network
+    api rootProject.ext.dependencies.okhttp
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["adapter-rxjava"]
+    //json解析
+    api rootProject.ext.dependencies.gson
+    //glide图片加载库
+    api rootProject.ext.dependencies.glide
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    //recyclerview的databinding套装
+    api rootProject.ext.dependencies.bindingcollectionadapter
+    api rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]
+    //Google LiveData和ViewModel组件
+    api rootProject.ext.dependencies["lifecycle-extensions"]
+    annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+}
+repositories {
+    mavenCentral()
+}
