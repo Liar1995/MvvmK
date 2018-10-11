@@ -5,44 +5,29 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.support.multidex.MultiDex
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import com.summer.kbase.BuildConfig
 
 /**
  * Created by sunmeng on 2018/8/1.
  * Email:sunmeng995@gmail.com
  * Description:
  */
-@SuppressLint("StaticFieldLeak")
-class BaseApplication : Application() {
-
-    companion object {
-        lateinit var instance: BaseApplication
-    }
+open class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
-        registerActivityLifecycleCallbacks(mCallbacks)
+        initLogger()
     }
 
-    private val mCallbacks = object : Application.ActivityLifecycleCallbacks {
-
-        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
-            AppManager.instance.addActivity(activity)
-        }
-
-        override fun onActivityStarted(activity: Activity) {}
-
-        override fun onActivityResumed(activity: Activity) {}
-
-        override fun onActivityPaused(activity: Activity) {}
-
-        override fun onActivityStopped(activity: Activity) {}
-
-        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
-
-        override fun onActivityDestroyed(activity: Activity) {
-            AppManager.instance.popActivity(activity)
-        }
+    private fun initLogger() {
+        Logger.addLogAdapter(object : AndroidLogAdapter() {
+            override fun isLoggable(priority: Int, tag: String?): Boolean {
+                return BuildConfig.DEBUG
+            }
+        })
     }
 
 }
