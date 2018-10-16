@@ -18,10 +18,7 @@ import dagger.multibindings.IntoMap
  * Description:
  */
 @Module
-abstract class MainFragmentBuilder {
-
-    @Binds
-    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+abstract class FragmentInjectBuilder {
 
     @FragmentScope
     @ContributesAndroidInjector(modules = [JordonModule::class])

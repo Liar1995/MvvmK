@@ -11,7 +11,7 @@ import javax.inject.Singleton
  * Description:DaggerModule 主要提供一些全局依赖，okHttpClient，retrofit
  */
 @Module
-class DaggerModule(private val mApplication:Application) {
+class DaggerModule(private val mApplication: Application) {
 
     @Singleton
     @Provides

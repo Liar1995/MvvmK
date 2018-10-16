@@ -3,6 +3,7 @@ package com.summer.kbase.di.component
 import android.app.Application
 import com.summer.kbase.di.DaggerDelegate
 import com.summer.kbase.di.module.DaggerModule
+import com.summer.kbase.di.module.ViewModelFactoryModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
@@ -13,10 +14,21 @@ import javax.inject.Singleton
  * Description:DaggerComponent 顶级注入器，作用域是 @Singleton
  */
 @Singleton
-@Component(modules = [(AndroidInjectionModule::class), (DaggerModule::class)])
+@Component(modules = [(ViewModelFactoryModule::class), (AndroidInjectionModule::class), (DaggerModule::class)])
 interface DaggerComponent {
 
+    /**
+     * 获取 Application
+     *
+     * @return Application
+     */
     fun application(): Application
+
+    /**
+     * Dagger 注入
+     *
+     * @param daggerDelegate ArmsInjector
+     */
     fun inject(daggerDelegate: DaggerDelegate)
 
 }

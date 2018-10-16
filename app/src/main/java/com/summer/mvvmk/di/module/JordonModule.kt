@@ -18,10 +18,6 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class JordonModule {
 
-//    @FragmentScope
-//    @Provides
-//    fun provideJordon() = Person("sm", 19)
-
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel::class)
