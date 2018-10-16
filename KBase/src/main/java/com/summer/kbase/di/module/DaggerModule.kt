@@ -8,7 +8,7 @@ import javax.inject.Singleton
 /**
  * Created by sunmeng on 2018/10/11.
  * Email:sunmeng995@gmail.com
- * Description:
+ * Description:DaggerModule 主要提供一些全局依赖，okHttpClient，retrofit
  */
 @Module
 class DaggerModule(private val mApplication:Application) {

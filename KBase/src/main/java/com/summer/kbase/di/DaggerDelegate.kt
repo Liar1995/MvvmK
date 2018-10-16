@@ -9,7 +9,8 @@ import javax.inject.Inject
 /**
  * Created by sunmeng on 2018/10/11.
  * Email:sunmeng995@gmail.com
- * Description:
+ * Description:里的 DaggerDelegate 是一个代理类，为了克服 Application 继承的问题，
+ * 通过封装一个代理类来对 library 的 Dagger 注入进行管理，然后在需要的 Module 里使用
  */
 class DaggerDelegate(private val mApplication: Application) {
 

@@ -10,7 +10,7 @@ import javax.inject.Singleton
 /**
  * Created by sunmeng on 2018/10/11.
  * Email:sunmeng995@gmail.com
- * Description:library 的注入器，作用域是 @Singleton
+ * Description:DaggerComponent 顶级注入器，作用域是 @Singleton
  */
 @Singleton
 @Component(modules = [(AndroidInjectionModule::class), (DaggerModule::class)])

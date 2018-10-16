@@ -4,8 +4,8 @@ import com.summer.kbase.di.component.DaggerComponent
 import com.summer.kbase.di.scope.AppScope
 import com.summer.mvvmk.app.MainApplication
 import com.summer.mvvmk.di.module.AppModule
-import com.summer.mvvmk.di.module.MainActivityModule
-import com.summer.mvvmk.di.module.MainFragmentModule
+import com.summer.mvvmk.di.module.MainActivityBuilder
+import com.summer.mvvmk.di.module.MainFragmentBuilder
 import dagger.Component
 
 /**
@@ -15,7 +15,7 @@ import dagger.Component
  */
 @AppScope
 @Component(dependencies = [DaggerComponent::class], modules = [(AppModule::class),
-    (MainActivityModule::class), (MainFragmentModule::class)])
+    (MainActivityBuilder::class), (MainFragmentBuilder::class)])
 interface AppComponent {
     fun inject(mainApplication: MainApplication)
 }
