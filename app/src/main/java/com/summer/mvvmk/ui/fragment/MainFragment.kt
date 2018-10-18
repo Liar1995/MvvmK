@@ -24,7 +24,7 @@ import javax.inject.Inject
  */
 class MainFragment : Fragment() {
 
-    //    @Inject
+//    @Inject
 //    lateinit var jordon: Person
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -39,9 +39,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(MainViewModel::class.java)
-        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         viewModel.userId.observe(this) {
-            //            text.text = "${jordon.name} -- ${jordon.age} -- $it"
+//            text.text = "${jordon.name} -- ${jordon.age} -- $it"
             text.text = "-- $it"
         }
         text.setOnClickListener {

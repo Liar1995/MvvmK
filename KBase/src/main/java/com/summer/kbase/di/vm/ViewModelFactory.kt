@@ -9,8 +9,7 @@ import javax.inject.Provider
 /**
  * Created by sunmeng on 2018/10/15.
  * Email:sunmeng995@gmail.com
- * Description:官方的是用反射直接创建，自己实现的是利用dagger的机制试下注入的
- * ViewModel的创建不可直接new，需要使用这个ViewModelProviders才能与Activity或者
+ * Description:
  */
 class ViewModelFactory @Inject constructor(
         private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>)
