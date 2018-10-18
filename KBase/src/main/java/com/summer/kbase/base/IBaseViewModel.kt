@@ -33,14 +33,4 @@ interface IBaseViewModel : LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun onPause()
 
-    /**
-     * 注册EventBus
-     */
-    fun registerEventBus()
-
-    /**
-     * 移除EventBus
-     */
-    fun removeEventBus()
-
 }

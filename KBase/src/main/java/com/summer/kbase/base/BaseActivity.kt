@@ -11,6 +11,7 @@ import android.os.Messenger
 import android.support.v4.app.FragmentActivity
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import java.lang.reflect.ParameterizedType
+import javax.inject.Inject
 
 /**
  * Created by sunmeng on 2018/10/17.
@@ -19,10 +20,11 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseActivity {
 
-    var viewModel: VM? = null
-    lateinit var binding: V
+    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    var viewModel: VM? = null
+    lateinit var binding: V
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +38,6 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         initData()
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable()
-        //注册RxBus
-        viewModel?.apply { registerEventBus() }
     }
 
     /**
@@ -107,7 +107,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
      *
      * @return 继承BaseViewModel的ViewModel
      */
-    fun initViewModel(): VM? {
+    open fun initViewModel(): VM? {
         return null
     }
 
@@ -127,7 +127,6 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         super.onDestroy()
         //解除ViewModel生命周期感应
         lifecycle.removeObserver(viewModel!!)
-        viewModel?.removeEventBus()
         viewModel = null
         binding.unbind()
     }

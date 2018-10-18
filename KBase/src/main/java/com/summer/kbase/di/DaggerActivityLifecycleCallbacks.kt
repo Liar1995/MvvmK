@@ -38,8 +38,6 @@ class DaggerActivityLifecycleCallbacks @Inject constructor() : Application.Activ
 
     override fun onActivityCreated(activity: Activity?, p1: Bundle?) {
         AndroidInjection.inject(activity)
-        //如果该 Activity 的 Fragment 需要 Dagger 注入，即实现了 HasSupportFragmentInjector，
-        //就会注册上一步的 DaggerFragmentLifecycleCallbacks 来实现 Dagger 注入。
         activity?.let {
             if ((activity is HasSupportFragmentInjector || activity.application is HasSupportFragmentInjector) && activity is FragmentActivity) {
                 activity.supportFragmentManager.registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks, true)

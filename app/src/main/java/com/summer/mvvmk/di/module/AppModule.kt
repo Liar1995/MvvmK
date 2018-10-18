@@ -9,5 +9,5 @@ import dagger.Module
  * Email:sunmeng995@gmail.com
  * Description:提供全局级别的application
  */
-@Module(includes = [(ViewModelFactoryModule::class), (ActivityInjectBuilder::class), (FragmentInjectBuilder::class)])
+@Module(includes = [(ViewModelFactoryModule::class)])//, (FragmentInjectBuilder::class), (ActivityInjectBuilder::class)
 class AppModule(private val mApplication: Application)

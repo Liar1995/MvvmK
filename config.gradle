@@ -64,6 +64,8 @@ ext {
             "lifecycle-compiler"                   : "android.arch.lifecycle:compiler:1.1.1",
             //logger
             "logger"                               : "com.orhanobut:logger:2.2.0",
+            //eventbus
+            "eventbus"                             : "org.greenrobot:eventbus:3.1.1",
     ]
 }
 

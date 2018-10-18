@@ -43,7 +43,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
             }
             viewModel = createViewModel(this, modelClass as Class<ViewModel>, viewModelFactory) as VM
         }
-        binding = DataBindingUtil.inflate(inflater, initContentView(inflater!!, container, savedInstanceState), container, false)
+        binding = DataBindingUtil.inflate(inflater, initContentView(inflater, container, savedInstanceState), container, false)
         binding.setVariable(initVariableId(), viewModel)
         //让ViewModel拥有View的生命周期感应
         lifecycle.addObserver(viewModel!!)
@@ -58,7 +58,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         registerUIChangeLiveDataCallBack()
         initData()
         initViewObservable()
-        viewModel?.registerEventBus()
     }
 
     //注册ViewModel与View的契约UI回调事件
@@ -118,7 +117,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         super.onDestroy()
         //解除ViewModel生命周期感应
         lifecycle.removeObserver(viewModel!!)
-        viewModel?.removeEventBus()
         viewModel = null
         binding.unbind()
     }

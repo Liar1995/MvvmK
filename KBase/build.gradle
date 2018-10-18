@@ -32,7 +32,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //support
     api rootProject.ext.support["support-v4"]
     api rootProject.ext.support["appcompat-v7"]
@@ -74,6 +74,12 @@ dependencies {
     kapt rootProject.ext.dependencies["dagger-compiler"]
     kapt rootProject.ext.dependencies["dagger-processor"]
     kapt rootProject.ext.dependencies["databinding-compiler"]
+    //databinding
+//    kapt "androidx.databinding:databinding-compiler:3.3.0-alpha13"
+//    kapt "com.android.databinding:compiler:3.1.4"
+    //eventbus
+    api rootProject.ext.dependencies["eventbus"]
+
 }
 repositories {
     mavenCentral()

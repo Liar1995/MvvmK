@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.*
 import android.content.Context
 import com.trello.rxlifecycle2.LifecycleProvider
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by sunmeng on 2018/10/17.
@@ -76,7 +77,16 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     override fun onStart() {
+        if (useEventBus()) {
+            EventBus.getDefault().register(this)
+        }
+    }
 
+    override fun onCleared() {
+        super.onCleared()
+        if (useEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
     }
 
     override fun onStop() {
@@ -91,12 +101,13 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     }
 
-    override fun registerEventBus() {
-
-    }
-
-    override fun removeEventBus() {
-
+    /**
+     * 是否使用 EventBus
+     *
+     * @return True if use
+     */
+    protected fun useEventBus(): Boolean {
+        return true
     }
 
 }
