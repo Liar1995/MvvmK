@@ -1,14 +1,10 @@
 package com.summer.mvvmk.di.module
 
 import android.arch.lifecycle.ViewModel
-import com.summer.kbase.di.scope.FragmentScope
 import com.summer.kbase.di.vm.ViewModelKey
-import com.summer.mvvmk.entity.Person
-import com.summer.mvvmk.ui.vm.LoginViewModel
 import com.summer.mvvmk.ui.vm.MainViewModel
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoMap
 
 /**
@@ -21,7 +17,7 @@ abstract class JordonModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(LoginViewModel::class)
-    abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 
 }

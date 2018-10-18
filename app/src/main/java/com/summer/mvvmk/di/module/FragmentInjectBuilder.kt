@@ -20,8 +20,8 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class FragmentInjectBuilder {
 
-//    @FragmentScope
-//    @ContributesAndroidInjector(modules = [JordonModule::class])
-//    abstract fun contributeMainFragment(): MainFragment
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [JordonModule::class])
+    abstract fun contributeMainFragment(): MainFragment
 
 }

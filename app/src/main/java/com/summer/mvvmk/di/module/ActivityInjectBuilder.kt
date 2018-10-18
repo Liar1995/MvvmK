@@ -1,7 +1,6 @@
 package com.summer.mvvmk.di.module
 
 import com.summer.kbase.di.scope.ActivityScope
-import com.summer.mvvmk.ui.activity.LoginActivity
 import com.summer.mvvmk.ui.activity.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -14,12 +13,8 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityInjectBuilder {
 
-//    @ActivityScope
-//    @ContributesAndroidInjector(modules = [KobeModule::class])
-//    abstract fun contributeMainActivity(): MainActivity
-
     @ActivityScope
-    @ContributesAndroidInjector(modules = [JordonModule::class])
-    abstract fun contributeLoginActivity(): LoginActivity
+    @ContributesAndroidInjector(modules = [KobeModule::class])
+    abstract fun contributeMainActivity(): MainActivity
 
 }

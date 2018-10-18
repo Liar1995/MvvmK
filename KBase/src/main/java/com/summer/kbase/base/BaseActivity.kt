@@ -20,7 +20,7 @@ import javax.inject.Inject
  */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseActivity {
 
-    @Inject
+//    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var viewModel: VM? = null
