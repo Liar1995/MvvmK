@@ -24,8 +24,6 @@ import javax.inject.Inject
  */
 class MainFragment : Fragment() {
 
-//    @Inject
-//    lateinit var jordon: Person
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 

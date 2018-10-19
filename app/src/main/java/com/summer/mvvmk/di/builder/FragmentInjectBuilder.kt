@@ -1,4 +1,4 @@
-package com.summer.mvvmk.di.module
+package com.summer.mvvmk.di.builder
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
@@ -20,8 +20,8 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class FragmentInjectBuilder {
 
-    @FragmentScope
-    @ContributesAndroidInjector(modules = [JordonModule::class])
-    abstract fun contributeMainFragment(): MainFragment
+//    @FragmentScope
+//    @ContributesAndroidInjector(modules = [JordonModule::class])
+//    abstract fun contributeMainFragment(): MainFragment
 
 }
