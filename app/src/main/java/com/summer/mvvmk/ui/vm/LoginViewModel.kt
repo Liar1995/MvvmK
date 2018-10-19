@@ -11,6 +11,6 @@ import javax.inject.Inject
  */
 class LoginViewModel @Inject constructor(application: Application) : BaseViewModel(application) {
 
-    override fun useEventBus()=false
+
 
 }

@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
  * Created by sunmeng on 2018/10/11.
  * Email:sunmeng995@gmail.com
- * Description:
+ * Description:Application.ActivityLifecycleCallbacks代理，避免application继承问题，后期集成tinker方便
  */
 class DaggerActivityLifecycleCallbacks @Inject constructor() : Application.ActivityLifecycleCallbacks {
 

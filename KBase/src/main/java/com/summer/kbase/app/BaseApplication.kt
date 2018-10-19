@@ -22,6 +22,9 @@ open class BaseApplication : Application() {
         initLogger()
     }
 
+    /**
+     * 配置Logger
+     * */
     private fun initLogger() {
         Logger.addLogAdapter(object : AndroidLogAdapter() {
             override fun isLoggable(priority: Int, tag: String?): Boolean {

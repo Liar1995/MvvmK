@@ -11,6 +11,7 @@ import android.os.Messenger
 import android.support.v4.app.FragmentActivity
 import com.summer.kbase.common.LoggerUtils
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import org.greenrobot.eventbus.EventBus
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
@@ -24,8 +25,8 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    private lateinit var binding: V
     var viewModel: VM? = null
-    lateinit var binding: V
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +38,11 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         registerUIChangeLiveDataCallBack()
         //页面数据初始化方法
         initData()
-        LoggerUtils.loggerD("viewModelFactory: $viewModelFactory")
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable()
-
+        if (useEventBus()) {
+            EventBus.getDefault().register(this)
+        }
     }
 
     /**
@@ -83,11 +85,11 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
     }
 
-    fun showDialog(title: String?) {
+    open fun showDialog(title: String?) {
         //showDialog
     }
 
-    fun dismissDialog() {
+    open fun dismissDialog() {
         //dismissDialog
     }
 
@@ -132,6 +134,18 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         lifecycle.removeObserver(viewModel!!)
         viewModel = null
         binding.unbind()
+        if (useEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
+    }
+
+    /**
+     * 是否使用 EventBus
+     *
+     * @return True if use
+     */
+    protected open fun useEventBus(): Boolean {
+        return false
     }
 
     /**

@@ -3,6 +3,8 @@ package com.summer.kbase.base
 import android.app.Application
 import android.arch.lifecycle.*
 import android.content.Context
+import android.util.Log
+import com.summer.kbase.common.LoggerUtils
 import com.trello.rxlifecycle2.LifecycleProvider
 import org.greenrobot.eventbus.EventBus
 
@@ -65,50 +67,40 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    /**
+     * An {@link Event Event} constant that can be used to match all events.
+     * */
     override fun onAny(owner: LifecycleOwner, event: Lifecycle.Event) {
-
+        LoggerUtils.loggerD("BaseViewModel onAny")
     }
 
     override fun onCreate() {
-
+        LoggerUtils.loggerD("BaseViewModel onCreate")
     }
 
     override fun onDestroy() {
+        LoggerUtils.loggerD("BaseViewModel onDestroy")
+    }
 
+    override fun onStop() {
+        LoggerUtils.loggerD("BaseViewModel onStop")
+    }
+
+    override fun onResume() {
+        LoggerUtils.loggerD("BaseViewModel onResume")
+    }
+
+    override fun onPause() {
+        LoggerUtils.loggerD("BaseViewModel onPause")
     }
 
     override fun onStart() {
-        if (useEventBus()) {
-            EventBus.getDefault().register(this)
-        }
+        LoggerUtils.loggerD("BaseViewModel onStart")
     }
 
     override fun onCleared() {
         super.onCleared()
-        if (useEventBus()) {
-            EventBus.getDefault().unregister(this)
-        }
-    }
-
-    override fun onStop() {
-
-    }
-
-    override fun onResume() {
-
-    }
-
-    override fun onPause() {
-
-    }
-
-    /**
-     * 是否使用 EventBus
-     *
-     * @return True if use
-     */
-    protected open fun useEventBus(): Boolean {
-        return true
+        LoggerUtils.loggerD("BaseViewModel onCleared")
     }
 
 }

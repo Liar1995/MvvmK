@@ -13,7 +13,7 @@ import javax.inject.Singleton
 /**
  * Created by sunmeng on 2018/10/11.
  * Email:sunmeng995@gmail.com
- * Description:
+ * Description:FragmentManager.FragmentLifecycleCallbacks代理，在ActivityLifecycleCallbacks统一管理
  */
 @Singleton
 class DaggerFragmentLifecycleCallbacks @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks() {

@@ -9,7 +9,7 @@ import javax.inject.Provider
 /**
  * Created by sunmeng on 2018/10/15.
  * Email:sunmeng995@gmail.com
- * Description:
+ * Description:创建&储存VM
  */
 class ViewModelFactory @Inject constructor(
         private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>)

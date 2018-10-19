@@ -8,6 +8,12 @@ import com.summer.mvvmk.R
 import com.summer.mvvmk.databinding.ActivityLoginBinding
 import com.summer.mvvmk.ui.vm.LoginViewModel
 import javax.inject.Inject
+import android.databinding.adapters.TextViewBindingAdapter.setText
+import com.summer.kbase.common.LoggerUtils
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
+
 
 /**
  * Created by sunmeng on 2018/10/19.
@@ -17,9 +23,6 @@ import javax.inject.Inject
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initContentView(savedInstanceState: Bundle?) = R.layout.activity_login
-
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
 
     override fun initVariableId() = BR.viewModel
 
