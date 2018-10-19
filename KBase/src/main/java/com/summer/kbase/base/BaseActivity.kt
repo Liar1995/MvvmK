@@ -32,7 +32,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         //页面接受的参数方法
         initParam()
         //私有的初始化Databinding和ViewModel方法
-        initViewDataBinding(savedInstanceState!!)
+        initViewDataBinding(savedInstanceState)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()
         //页面数据初始化方法
@@ -46,7 +46,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
     /**
      * 注入绑定
      */
-    private fun initViewDataBinding(savedInstanceState: Bundle) {
+    private fun initViewDataBinding(savedInstanceState: Bundle?) {
         viewModel = initViewModel()
         if (viewModel == null) {
             val modelClass: Class<*>
@@ -96,7 +96,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
      *
      * @return 布局layout的id
      */
-    abstract fun initContentView(savedInstanceState: Bundle): Int
+    abstract fun initContentView(savedInstanceState: Bundle?): Int
 
     /**
      * 初始化ViewModel的id

@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.EventBus
  * Description:
  */
 open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel {
+
     private var uc: UIChangeLiveData? = null
     private lateinit var lifecycle: LifecycleProvider<*>
 
@@ -106,7 +107,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      *
      * @return True if use
      */
-    protected fun useEventBus(): Boolean {
+    protected open fun useEventBus(): Boolean {
         return true
     }
 

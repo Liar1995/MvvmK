@@ -20,8 +20,8 @@ abstract class ActivityInjectBuilder {
     @ContributesAndroidInjector(modules = [KobeModule::class])
     abstract fun contributeMainActivity(): MainActivity
 
-//    @ActivityScope
-//    @ContributesAndroidInjector(modules = [LoginVmModule::class])
-//    abstract fun contributeLoginActivity(): LoginActivity
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [LoginVmModule::class])
+    abstract fun contributeLoginActivity(): LoginActivity
 
 }

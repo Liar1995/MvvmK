@@ -16,7 +16,10 @@ import javax.inject.Inject
  */
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
-    override fun initContentView(savedInstanceState: Bundle) = R.layout.activity_login
+    override fun initContentView(savedInstanceState: Bundle?) = R.layout.activity_login
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
 
     override fun initVariableId() = BR.viewModel
 
