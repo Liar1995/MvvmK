@@ -1,16 +1,12 @@
 package com.summer.mvvmk.app
 
 import android.app.Activity
-import android.app.Application
-import android.support.v4.app.Fragment
 import com.summer.kbase.app.BaseApplication
 import com.summer.kbase.di.DaggerDelegate
-import com.summer.mvvmk.di.component.AppComponent
 import com.summer.mvvmk.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
-import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 /**
@@ -18,12 +14,12 @@ import javax.inject.Inject
  * Email:sunmeng995@gmail.com
  * Description:
  */
-class MainApplication : BaseApplication(), HasActivityInjector, HasSupportFragmentInjector {
+class MainApplication : BaseApplication(), HasActivityInjector {
 
     @Inject
     lateinit var mActivityInjector: DispatchingAndroidInjector<Activity>
-    @Inject
-    lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
+//    @Inject
+//    lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     private lateinit var mDaggerDelegate: DaggerDelegate
 
@@ -38,6 +34,6 @@ class MainApplication : BaseApplication(), HasActivityInjector, HasSupportFragme
 
     override fun activityInjector(): AndroidInjector<Activity> = mActivityInjector
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = mFragmentInjector
+//    override fun supportFragmentInjector(): AndroidInjector<Fragment> = mFragmentInjector
 
 }
