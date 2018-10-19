@@ -11,4 +11,13 @@ import javax.inject.Inject
  */
 class LoginViewModel @Inject constructor(application: Application) : BaseViewModel(application) {
 
+    /**
+     * 是否使用 EventBus
+     *
+     * @return True if use
+     */
+    override fun useEventBus(): Boolean {
+        return false
+    }
+
 }

@@ -2,7 +2,6 @@ package com.summer.kbase.base
 
 import android.app.Application
 import android.arch.lifecycle.*
-import android.content.Context
 import com.trello.rxlifecycle2.LifecycleProvider
 import org.greenrobot.eventbus.EventBus
 
@@ -106,7 +105,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      *
      * @return True if use
      */
-    protected fun useEventBus(): Boolean {
+    protected open fun useEventBus(): Boolean {
         return true
     }
 

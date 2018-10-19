@@ -7,10 +7,12 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.os.Messenger
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.summer.kbase.common.LoggerUtils
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
@@ -19,10 +21,14 @@ import javax.inject.Inject
  * Email:sunmeng995@gmail.com
  * Description:
  */
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseActivity {
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseActivity
+,HasSupportFragmentInjector{
 
-//    @Inject
+    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     var viewModel: VM? = null
     lateinit var binding: V
@@ -32,7 +38,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         //页面接受的参数方法
         initParam()
         //私有的初始化Databinding和ViewModel方法
-        initViewDataBinding(savedInstanceState!!)
+        initViewDataBinding(savedInstanceState)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()
         //页面数据初始化方法
@@ -43,10 +49,12 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
     }
 
+    override fun supportFragmentInjector() = fragmentInjector
+
     /**
      * 注入绑定
      */
-    private fun initViewDataBinding(savedInstanceState: Bundle) {
+    private fun initViewDataBinding(savedInstanceState: Bundle?) {
         viewModel = initViewModel()
         if (viewModel == null) {
             val modelClass: Class<*>
@@ -96,7 +104,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
      *
      * @return 布局layout的id
      */
-    abstract fun initContentView(savedInstanceState: Bundle): Int
+    abstract fun initContentView(savedInstanceState: Bundle?): Int
 
     /**
      * 初始化ViewModel的id
