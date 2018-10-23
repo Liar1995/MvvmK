@@ -79,6 +79,13 @@ dependencies {
 //    kapt "com.android.databinding:compiler:3.1.4"
     //eventbus
     api rootProject.ext.dependencies["eventbus"]
+    //eventbus
+    api rootProject.ext.dependencies["stetho"]
+    api rootProject.ext.dependencies["stethonetworkInterceptor"]
+    //persistentCookieJar
+    api rootProject.ext.dependencies["persistentCookieJar"]
+    //okhttp-logger
+    api rootProject.ext.dependencies["okhttp-logger"]
 
 }
 repositories {

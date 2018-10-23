@@ -2,20 +2,21 @@ package com.summer.kbase.di.component
 
 import android.app.Application
 import com.summer.kbase.di.DaggerDelegate
-import com.summer.kbase.di.module.DaggerModule
-import com.summer.kbase.di.module.ViewModelFactoryModule
+import com.summer.kbase.di.module.*
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 import dagger.android.support.AndroidSupportInjectionModule
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
 /**
  * Created by sunmeng on 2018/10/11.
  * Email:sunmeng995@gmail.com
- * Description:DaggerComponent 顶级注入器，作用域是 @Singleton
+ * Description:DaggerComponent 顶级注入器，作用域是 @Singleton，提供一些全局对象
  */
 @Singleton
-@Component(modules = [(ViewModelFactoryModule::class), (AndroidSupportInjectionModule::class), (DaggerModule::class)])
+@Component(modules = [(ViewModelFactoryModule::class), (AndroidSupportInjectionModule::class)
+    , (DaggerModule::class),(NetworkModule::class)])
 interface DaggerComponent {
 
     /**
@@ -31,5 +32,12 @@ interface DaggerComponent {
      * @param daggerDelegate ArmsInjector
      */
     fun inject(daggerDelegate: DaggerDelegate)
+
+    /**
+     * 获取 Retrofit
+     *
+     * @return Retrofit
+     */
+    fun retrofit(): Retrofit
 
 }
