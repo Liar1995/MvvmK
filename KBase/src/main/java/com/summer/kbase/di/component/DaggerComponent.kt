@@ -1,6 +1,7 @@
 package com.summer.kbase.di.component
 
 import android.app.Application
+import com.summer.kbase.common.Scheduler
 import com.summer.kbase.di.DaggerDelegate
 import com.summer.kbase.di.module.*
 import dagger.Component
@@ -39,5 +40,11 @@ interface DaggerComponent {
      * @return Retrofit
      */
     fun retrofit(): Retrofit
+
+    /**
+     * 全局Scheduler处理
+     *
+     */
+    fun scheduler(): Scheduler
 
 }

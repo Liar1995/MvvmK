@@ -7,6 +7,7 @@ import com.summer.kbase.app.BaseApplication
 import com.summer.kbase.di.DaggerDelegate
 import com.summer.mvvmk.di.component.AppComponent
 import com.summer.mvvmk.di.component.DaggerAppComponent
+import com.summer.mvvmk.di.module.AppModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -33,7 +34,8 @@ class MainApplication : BaseApplication(), HasActivityInjector, HasSupportFragme
         mDaggerDelegate = DaggerDelegate(this)
         mDaggerDelegate.onCreate()
         //注入主 Module 中（该 Module 全局）
-        DaggerAppComponent.builder().daggerComponent(mDaggerDelegate.mComponent).build().inject(this)
+        DaggerAppComponent.builder().daggerComponent(mDaggerDelegate.mComponent)
+                .appModule(AppModule(this)).build().inject(this)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = mActivityInjector

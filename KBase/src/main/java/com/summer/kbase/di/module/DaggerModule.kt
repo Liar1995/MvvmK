@@ -1,6 +1,8 @@
 package com.summer.kbase.di.module
 
 import android.app.Application
+import com.summer.kbase.common.AppScheduler
+import com.summer.kbase.common.Scheduler
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -17,6 +19,12 @@ class DaggerModule(private val mApplication: Application) {
     @Provides
     fun provideApplication(): Application {
         return this.mApplication
+    }
+
+    @Provides
+    @Singleton
+    fun scheduler(): Scheduler {
+        return AppScheduler()
     }
 
 }

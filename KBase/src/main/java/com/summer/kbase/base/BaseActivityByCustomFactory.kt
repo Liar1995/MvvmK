@@ -7,9 +7,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.os.Messenger
 import android.support.v4.app.FragmentActivity
-import com.summer.kbase.common.LoggerUtils
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 import java.lang.reflect.ParameterizedType
@@ -18,12 +16,9 @@ import javax.inject.Inject
 /**
  * Created by sunmeng on 2018/10/17.
  * Email:sunmeng995@gmail.com
- * Description:
+ * Description:Activity基类，使用自定义ViewModelFactory对象构建ViewModel，自定义对象可使用后续Repository逻辑
  */
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseActivity {
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+abstract class BaseActivityByCustomFactory<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseActivity {
 
     private lateinit var binding: V
     var viewModel: VM? = null
@@ -50,17 +45,6 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
      */
     private fun initViewDataBinding(savedInstanceState: Bundle?) {
         viewModel = initViewModel()
-        if (viewModel == null) {
-            val modelClass: Class<*>
-            val type = javaClass.genericSuperclass
-            modelClass = if (type is ParameterizedType) {
-                type.actualTypeArguments[1] as Class<*>
-            } else {
-                //如果没有指定泛型参数，则默认使用BaseViewModel
-                BaseViewModel::class.java
-            }
-            viewModel = createViewModel(this, modelClass as Class<ViewModel>, viewModelFactory) as VM
-        }
         //DataBindingUtil类需要在project的build中配置 dataBinding {enabled true }, 同步后会自动关联android.databinding包
         binding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState))
         binding.setVariable(initVariableId(), viewModel)
@@ -68,7 +52,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
             //让ViewModel拥有View的生命周期感应
             lifecycle.addObserver(this)
             //注入RxLifecycle生命周期
-            this.injectLifecycleProvider(this@BaseActivity)
+            this.injectLifecycleProvider(this@BaseActivityByCustomFactory)
         }
     }
 
@@ -148,14 +132,4 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         return false
     }
 
-    /**
-     * 创建ViewModel
-     *
-     * @param cls
-     * @param <T>
-     * @return</T>
-     * */
-    fun <T : ViewModel> createViewModel(activity: FragmentActivity, cls: Class<T>, factory: ViewModelProvider.Factory): T {
-        return ViewModelProviders.of(activity, factory).get(cls)
-    }
 }
