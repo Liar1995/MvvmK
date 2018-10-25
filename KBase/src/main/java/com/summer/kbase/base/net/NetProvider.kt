@@ -1,4 +1,4 @@
-package com.summer.kbase.net
+package com.summer.kbase.base.net
 
 import okhttp3.CookieJar
 import okhttp3.Interceptor

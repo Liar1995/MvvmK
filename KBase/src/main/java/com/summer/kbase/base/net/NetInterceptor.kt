@@ -1,8 +1,5 @@
-package com.summer.kbase.net
+package com.summer.kbase.base.net
 
-import android.util.Log
-
-import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

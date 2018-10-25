@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KBase</string>
+    <string name="network_unavailable">网络连接不可用，请检查手机网络</string>
 </resources>

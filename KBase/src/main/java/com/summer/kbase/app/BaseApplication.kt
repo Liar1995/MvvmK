@@ -15,11 +15,17 @@ import com.summer.kbase.BuildConfig
  * Email:sunmeng995@gmail.com
  * Description:
  */
+@SuppressLint("StaticFieldLeak")
 open class BaseApplication : Application() {
+
+    companion object {
+        lateinit var instance: Context
+    }
 
     override fun onCreate() {
         super.onCreate()
         initLogger()
+        instance = this
     }
 
     /**

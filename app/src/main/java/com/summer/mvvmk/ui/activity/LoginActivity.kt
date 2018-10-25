@@ -27,5 +27,4 @@ class LoginActivity : BaseActivityByCustomFactory<ActivityLoginBinding, LoginVie
     override fun initVariableId() = BR.viewModel
 
     override fun initViewModel(): LoginViewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
-
 }

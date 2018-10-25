@@ -1,7 +1,10 @@
 package com.summer.mvvmk.repository
 
+import com.summer.kbase.base.rx.BaseSingleObserver
 import com.summer.kbase.common.LoggerUtils
 import com.summer.kbase.common.Scheduler
+import com.summer.kbase.ext.execute
+import com.summer.mvvmk.data.protocol.GankResp
 import com.summer.mvvmk.repository.api.GankDataContract
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -18,6 +21,9 @@ class GankRepository(
 
     override fun getGankData() {
         LoggerUtils.loggerW("GankRepository")
+//        remote.getGankData().execute(object : BaseSingleObserver<GankResp>(){
+//
+//        })
     }
 
 }

@@ -1,13 +1,9 @@
-package com.summer.kbase.net
+package com.summer.kbase.base.net
 
 import android.content.Context
-import android.util.Log
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import okhttp3.*
-import java.io.IOException
-import com.franmontiel.persistentcookiejar.cache.CookieCache
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
-import com.franmontiel.persistentcookiejar.persistence.CookiePersistor
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.summer.kbase.BuildConfig
 

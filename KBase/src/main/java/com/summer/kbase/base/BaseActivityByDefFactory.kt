@@ -74,21 +74,25 @@ abstract class BaseActivityByDefFactory<V : ViewDataBinding, VM : BaseViewModel>
     private fun registerUIChangeLiveDataCallBack() {
         viewModel?.let {
             //加载对话框显示
-            it.getUC().getShowDialogLiveData().observe(this, Observer<String> { title -> showDialog(title) })
+//            it.getUC().getShowDialogLiveData().observe(this, Observer<String> { title -> showDialog() })
             //加载对话框消失
-            it.getUC().getDismissDialogLiveData().observe(this, Observer<Boolean> { dismissDialog() })
+//            it.getUC().getDismissDialogLiveData().observe(this, Observer<Boolean> { dismissDialog() })
             //关闭界面
             it.getUC().getFinishLiveData().observe(this, Observer<Boolean> { finish() })
         }
 
     }
 
-    open fun showDialog(title: String?) {
-        //showDialog
+    override fun showLoading() {
+        //showLoading
     }
 
-    open fun dismissDialog() {
-        //dismissDialog
+    override fun hideLoading() {
+        //hideLoading
+    }
+
+    override fun onError(message: String) {
+        //toast error
     }
 
     /**

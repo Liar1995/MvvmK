@@ -1,12 +1,10 @@
 package com.summer.kbase.di.module
 
 import android.app.Application
-import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.summer.kbase.BuildConfig
 import com.summer.kbase.base.BaseContract
-import com.summer.kbase.net.NetInterceptor
-import com.summer.kbase.net.NetProvider
-import com.summer.kbase.net.NetProviderImpl
+import com.summer.kbase.base.net.NetInterceptor
+import com.summer.kbase.base.net.NetProvider
+import com.summer.kbase.base.net.NetProviderImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
