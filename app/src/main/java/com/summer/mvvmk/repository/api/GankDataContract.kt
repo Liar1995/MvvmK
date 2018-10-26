@@ -1,5 +1,7 @@
 package com.summer.mvvmk.repository.api
 
+import android.arch.lifecycle.LiveData
+import com.summer.kbase.base.net.ApiResponse
 import com.summer.mvvmk.data.protocol.GankResp
 import io.reactivex.Single
 
@@ -11,11 +13,11 @@ import io.reactivex.Single
 object GankDataContract {
 
     interface Repository {
-        fun getGankData()
+        fun getGankData(): LiveData<ApiResponse<GankResp>>
     }
 
     interface Remote {
-        fun getGankData(): Single<GankResp>
+        fun getGankData(): LiveData<ApiResponse<GankResp>>
     }
 
 }

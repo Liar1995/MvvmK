@@ -7,7 +7,7 @@ package com.summer.kbase.base
  */
 object BaseContract {
 
-    const val BASE_URL = "https://gank.io/api/data/Android/"
+    const val BASE_URL = "https://gank.io/"
 
     //okhttp setting
     const val CONNECTTIMEOUTMILLS = 10 * 1000L

@@ -23,8 +23,10 @@ class LoginViewModel(application: Application, private val repo: GankDataContrac
         }
     })
 
-    fun getData() {
-        repo.getGankData()
+    fun getData() = repo.getGankData()
+
+    override fun onCleared() {
+        super.onCleared()
     }
 
 }

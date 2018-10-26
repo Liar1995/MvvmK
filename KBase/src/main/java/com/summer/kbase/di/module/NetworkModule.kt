@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.summer.kbase.base.BaseContract
 import dagger.Module
 import dagger.Provides
+import ja.burhanrashid52.base.liveUtils.LiveDataCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -26,11 +27,13 @@ class NetworkModule {
     fun providesRetrofit(
             gsonConverterFactory: GsonConverterFactory,
             rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
+            liveDataCallAdapterFactory: LiveDataCallAdapterFactory,
             okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder().baseUrl(BaseContract.BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
+                .addCallAdapterFactory(liveDataCallAdapterFactory)
                 .client(okHttpClient)
                 .build()
     }
@@ -45,6 +48,12 @@ class NetworkModule {
     @Singleton
     fun providesRxJavaCallAdapterFactory(): RxJava2CallAdapterFactory {
         return RxJava2CallAdapterFactory.create()
+    }
+
+    @Provides
+    @Singleton
+    fun providesLiveDataCallAdapterFactory(): LiveDataCallAdapterFactory {
+        return LiveDataCallAdapterFactory()
     }
 
     @Provides

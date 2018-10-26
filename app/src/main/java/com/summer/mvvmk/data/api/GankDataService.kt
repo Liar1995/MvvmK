@@ -1,5 +1,7 @@
 package com.summer.mvvmk.data.api
 
+import android.arch.lifecycle.LiveData
+import com.summer.kbase.base.net.ApiResponse
 import com.summer.mvvmk.data.protocol.GankResp
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -11,7 +13,7 @@ import retrofit2.http.GET
  */
 interface GankDataService {
 
-    @GET("/10/1")
-    fun getGankData(): Single<GankResp>
+    @GET("/api/data/Android/10/1")
+    fun getGankData(): LiveData<ApiResponse<GankResp>>
 
 }

@@ -19,11 +19,6 @@ class GankRepository(
         private val scheduler: Scheduler
 ) : GankDataContract.Repository {
 
-    override fun getGankData() {
-        LoggerUtils.loggerW("GankRepository")
-//        remote.getGankData().execute(object : BaseSingleObserver<GankResp>(){
-//
-//        })
-    }
+    override fun getGankData() = remote.getGankData()
 
 }
