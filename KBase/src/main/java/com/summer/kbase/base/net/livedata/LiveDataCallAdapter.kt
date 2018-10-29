@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ja.burhanrashid52.base.liveUtils
+package com.summer.kbase.base.net.livedata
 
 
 import android.arch.lifecycle.LiveData
@@ -38,7 +38,6 @@ class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, Li
     override fun adapt(call: Call<R>): LiveData<ApiResponse<R>> {
         return object : LiveData<ApiResponse<R>>() {
             var started = AtomicBoolean(false)
-
             override fun onActive() {
                 super.onActive()
                 if (started.compareAndSet(false, true)) {
@@ -46,7 +45,6 @@ class LiveDataCallAdapter<R>(private val responseType: Type) : CallAdapter<R, Li
                         override fun onResponse(call: Call<R>, response: Response<R>) {
                             postValue(ApiResponse(response))
                         }
-
                         override fun onFailure(call: Call<R>, throwable: Throwable) {
                             postValue(ApiResponse(throwable))
                         }

@@ -41,9 +41,6 @@ dependencies {
     //rxjava
     api rootProject.ext.dependencies.rxjava
     api rootProject.ext.dependencies.rxandroid
-    //rx管理View的生命周期
-    api rootProject.ext.dependencies.rxlifecycle
-    api rootProject.ext.dependencies["rxlifecycle-components"]
     //rxbinding
     api rootProject.ext.dependencies.rxbinding
     //rx权限请求

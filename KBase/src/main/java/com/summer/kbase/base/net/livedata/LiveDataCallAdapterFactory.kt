@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ja.burhanrashid52.base.liveUtils
+package com.summer.kbase.base.net.livedata
 
 import android.arch.lifecycle.LiveData
 import com.summer.kbase.base.net.ApiResponse

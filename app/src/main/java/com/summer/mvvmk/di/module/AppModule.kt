@@ -10,7 +10,6 @@ import com.summer.mvvmk.di.builder.FragmentInjectBuilder
 import com.summer.mvvmk.repository.GankRepository
 import com.summer.mvvmk.repository.api.GankDataContract
 import com.summer.mvvmk.repository.remote.GankRemoteData
-import com.summer.mvvmk.ui.vm.factory.LoginViewModelFactory
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -35,7 +34,7 @@ class AppModule(val mApplication: Application) {
     /*Repository*/
     @Provides
     @AppScope
-    fun listRepo(remote: GankDataContract.Remote, scheduler: Scheduler): GankDataContract.Repository = GankRepository(remote, scheduler)
+    fun listRepo(remote: GankDataContract.Remote,compositeDisposable: CompositeDisposable, scheduler: Scheduler): GankDataContract.Repository = GankRepository(remote,compositeDisposable,scheduler)
 
     @Provides
     @AppScope

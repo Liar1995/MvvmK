@@ -5,8 +5,9 @@ import android.arch.lifecycle.*
 import android.content.Context
 import android.util.Log
 import com.summer.kbase.common.LoggerUtils
-import com.trello.rxlifecycle2.LifecycleProvider
+import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
+import javax.inject.Inject
 
 /**
  * Created by sunmeng on 2018/10/17.
@@ -16,19 +17,17 @@ import org.greenrobot.eventbus.EventBus
 open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel {
 
     private var uc: UIChangeLiveData? = null
-    private lateinit var lifecycle: LifecycleProvider<*>
+
+    @Inject
+    lateinit var compositeDisposable: CompositeDisposable
 
     /**
-     * 注入RxLifecycle生命周期
+     * 注入CompositeDisposable管理对象
      *
-     * @param lifecycle
-     */
-    fun injectLifecycleProvider(lifecycle: LifecycleProvider<*>) {
-        this.lifecycle = lifecycle
-    }
-
-    fun getLifecycleProvider(): LifecycleProvider<*> {
-        return lifecycle
+     * @param compositeDisposable
+     * */
+    fun injectCompositeDisposableProvider(compositeDisposable: CompositeDisposable) {
+        this.compositeDisposable = compositeDisposable
     }
 
     fun getUC(): UIChangeLiveData {
@@ -71,7 +70,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * An {@link Event Event} constant that can be used to match all events.
      * */
     override fun onAny(owner: LifecycleOwner, event: Lifecycle.Event) {
-        LoggerUtils.loggerD("BaseViewModel onAny")
+//        LoggerUtils.loggerD("BaseViewModel onAny")
     }
 
     override fun onCreate() {
@@ -101,6 +100,13 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     override fun onCleared() {
         super.onCleared()
         LoggerUtils.loggerD("BaseViewModel onCleared")
+        compositeDisposable.let {
+            if (it.size() > 0) {
+                LoggerUtils.loggerD("compositeDisposable clear size : ${it.size()}")
+                it.clear()
+                LoggerUtils.loggerD("compositeDisposable clear size : ${it.size()}")
+            }
+        }
     }
 
 }

@@ -11,7 +11,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.trello.rxlifecycle2.components.support.RxFragment
+import com.summer.kbase.ext.observe
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -19,7 +19,7 @@ import java.lang.reflect.ParameterizedType
  * Email:sunmeng995@gmail.com
  * Description:
  */
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragment(), IBaseActivity {
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(), IBaseActivity {
 
     var viewModel: VM? = null
     lateinit var binding: V
@@ -48,7 +48,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         //让ViewModel拥有View的生命周期感应
         lifecycle.addObserver(viewModel!!)
         //注入RxLifecycle生命周期
-        viewModel?.injectLifecycleProvider(this)
+//        viewModel?.injectLifecycleProvider(this)
         return binding.root
     }
 

@@ -8,7 +8,9 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import android.support.v7.app.AppCompatActivity
+import com.summer.kbase.ext.observe
+import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
@@ -18,10 +20,13 @@ import javax.inject.Inject
  * Email:sunmeng995@gmail.com
  * Description:Activity基类，使用自定义ViewModelFactory对象构建ViewModel，自定义对象可使用后续Repository逻辑
  */
-abstract class BaseActivityByCustomFactory<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseActivity {
+abstract class BaseActivityByCustomFactory<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(), IBaseActivity {
 
     private lateinit var binding: V
     var viewModel: VM? = null
+
+    @Inject
+    lateinit var cd: CompositeDisposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +56,8 @@ abstract class BaseActivityByCustomFactory<V : ViewDataBinding, VM : BaseViewMod
         viewModel?.apply {
             //让ViewModel拥有View的生命周期感应
             lifecycle.addObserver(this)
-            //注入RxLifecycle生命周期
-            this.injectLifecycleProvider(this@BaseActivityByCustomFactory)
+            //注入CompositeDisposable管理对象
+            this.injectCompositeDisposableProvider(cd)
         }
     }
 

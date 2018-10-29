@@ -5,8 +5,8 @@ import com.summer.kbase.base.net.BaseFuncResponse
 import com.summer.kbase.base.net.BaseResp
 import com.summer.kbase.base.rx.BaseObserver
 import com.summer.kbase.base.rx.BaseSingleObserver
+import com.summer.kbase.common.AppScheduler
 import com.summer.kbase.common.Scheduler
-import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -56,6 +56,7 @@ fun Disposable.addTo(compositeDisposable: CompositeDisposable) {
     compositeDisposable.add(this)
 }
 
+
 /**
  * Extension function to subscribe on the background thread for a Flowable
  * */
@@ -77,17 +78,15 @@ fun <T> Observable<T>.performOnBack(scheduler: Scheduler): Observable<T> {
     return this.subscribeOn(scheduler.io())
 }
 
-fun <T> Observable<T>.execute(subscriber: BaseObserver<T>, lifecycleProvider: LifecycleProvider<*>) {
+fun <T> Observable<T>.execute(subscriber: BaseObserver<T>) {
     this.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .compose(lifecycleProvider.bindToLifecycle())
             .subscribe(subscriber)
 }
 
-fun <T> Single<T>.execute(subscriber: BaseSingleObserver<T>, lifecycleProvider: LifecycleProvider<*>) {
-    this.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .compose(lifecycleProvider.bindToLifecycle())
+fun <T> Single<T>.execute(subscriber: BaseSingleObserver<T>, scheduler: Scheduler) {
+    this.subscribeOn(scheduler.io())
+            .observeOn(scheduler.mainThread())
             .subscribe(subscriber)
 }
 

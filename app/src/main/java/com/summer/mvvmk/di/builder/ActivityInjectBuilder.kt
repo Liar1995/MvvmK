@@ -5,6 +5,7 @@ import com.summer.mvvmk.di.module.KobeModule
 import com.summer.mvvmk.di.module.LoginVmModule
 import com.summer.mvvmk.ui.activity.LoginActivity
 import com.summer.mvvmk.ui.activity.MainActivity
+import com.summer.mvvmk.ui.activity.TwoAct
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -23,5 +24,9 @@ abstract class ActivityInjectBuilder {
     @ActivityScope
     @ContributesAndroidInjector(modules = [LoginVmModule::class])
     abstract fun contributeLoginActivity(): LoginActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract fun contributeTwoActivity(): TwoAct
 
 }

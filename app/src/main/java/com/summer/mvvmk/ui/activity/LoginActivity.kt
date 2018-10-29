@@ -32,8 +32,11 @@ class LoginActivity : BaseActivityByCustomFactory<ActivityLoginBinding, LoginVie
 
     override fun initViewObservable() {
         super.initViewObservable()
-        viewModel?.getData()?.observe(this, Observer {
-            LoggerUtils.loggerD("LoginActivity success")
+//        viewModel?.getData()?.observe(this, Observer {
+//            LoggerUtils.loggerD("LoginActivity success")
+//        })
+        viewModel?.commentsOutcome?.observe(this, Observer {
+            LoggerUtils.loggerD("LoginActivity $it")
         })
     }
 

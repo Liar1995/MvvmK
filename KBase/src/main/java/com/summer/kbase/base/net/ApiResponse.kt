@@ -43,10 +43,10 @@ class ApiResponse<T> {
             if (!matcher.find() || matcher.groupCount() != 1) {
                 return null
             }
-            try {
-                return Integer.parseInt(matcher.group(1))
+            return try {
+                Integer.parseInt(matcher.group(1))
             } catch (ex: NumberFormatException) {
-                return null
+                null
             }
 
         }
@@ -80,7 +80,7 @@ class ApiResponse<T> {
         }
         val linkHeader = response.headers().get("link")
         if (linkHeader == null) {
-            links = emptyMap<String, String>()
+            links = emptyMap()
         } else {
             links = ArrayMap()
             val matcher = LINK_PATTERN.matcher(linkHeader)
@@ -95,7 +95,6 @@ class ApiResponse<T> {
     }
 
     companion object {
-
         private val TAG = "ApiResponse"
         private val LINK_PATTERN = Pattern.compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"")
         private val PAGE_PATTERN = Pattern.compile("page=(\\d)+")

@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.summer.kbase.base.BaseContract
 import dagger.Module
 import dagger.Provides
-import ja.burhanrashid52.base.liveUtils.LiveDataCallAdapterFactory
+import com.summer.kbase.base.net.livedata.LiveDataCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
