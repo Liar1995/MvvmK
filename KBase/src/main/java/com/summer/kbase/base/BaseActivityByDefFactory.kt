@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import com.summer.kbase.ext.observe
 import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
+import org.jetbrains.anko.toast
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
@@ -88,12 +89,12 @@ abstract class BaseActivityByDefFactory<V : ViewDataBinding, VM : BaseViewModel>
 
     }
 
-    override fun showLoading() {
+    override fun isShowLoading(status: Boolean) {
         //showLoading
-    }
-
-    override fun hideLoading() {
-        //hideLoading
+        if (status)
+            toast("展示loading")
+        else
+            toast("隐藏loading")
     }
 
     override fun onError(message: String) {

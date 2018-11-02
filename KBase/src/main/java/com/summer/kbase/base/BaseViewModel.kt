@@ -16,6 +16,18 @@ import javax.inject.Inject
  */
 open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel {
 
+    override fun showLoading() {
+
+    }
+
+    override fun hideLoading() {
+
+    }
+
+    override fun onError(message: String) {
+
+    }
+
     private var uc: UIChangeLiveData? = null
 
     @Inject

@@ -12,6 +12,10 @@ import android.support.v7.app.AppCompatActivity
 import com.summer.kbase.ext.observe
 import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.indeterminateProgressDialog
+import org.jetbrains.anko.progressDialog
+import org.jetbrains.anko.toast
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
@@ -63,7 +67,7 @@ abstract class BaseActivityByCustomFactory<V : ViewDataBinding, VM : BaseViewMod
 
     //注册ViewModel与View的契约UI回调事件
     private fun registerUIChangeLiveDataCallBack() {
-        viewModel?.let {
+        viewModel?.let { it ->
             //加载对话框显示
 //            it.getUC().getShowDialogLiveData().observe(this, Observer<String> { title -> showDialog() })
             //加载对话框消失
@@ -74,16 +78,17 @@ abstract class BaseActivityByCustomFactory<V : ViewDataBinding, VM : BaseViewMod
 
     }
 
-    override fun showLoading() {
+    override fun isShowLoading(status: Boolean) {
         //showLoading
-    }
-
-    override fun hideLoading() {
-        //hideLoading
+        if (status)
+            toast("展示loading")
+        else
+            toast("隐藏loading")
     }
 
     override fun onError(message: String) {
         //toast error
+        toast(message)
     }
 
     /**

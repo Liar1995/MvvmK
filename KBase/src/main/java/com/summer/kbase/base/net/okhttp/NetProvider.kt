@@ -1,5 +1,6 @@
-package com.summer.kbase.base.net
+package com.summer.kbase.base.net.okhttp
 
+import com.summer.kbase.base.net.okhttp.RequestHandler
 import okhttp3.CookieJar
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

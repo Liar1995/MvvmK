@@ -1,16 +1,19 @@
 package com.summer.kbase.di.module
 
 import android.app.Application
+import com.summer.kbase.BuildConfig
 import com.summer.kbase.base.BaseContract
-import com.summer.kbase.base.net.NetInterceptor
-import com.summer.kbase.base.net.NetProvider
-import com.summer.kbase.base.net.NetProviderImpl
+import com.summer.kbase.base.net.okhttp.NetInterceptor
+import com.summer.kbase.base.net.okhttp.NetProvider
+import com.summer.kbase.base.net.okhttp.NetProviderImpl
+import com.summer.kbase.base.net.logging.Level
+import com.summer.kbase.base.net.logging.LoggingInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.internal.platform.Platform
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -53,9 +56,14 @@ class OkHttpClientModule {
         builder.addInterceptor(NetInterceptor(provider.configHandler()))
 
         if (provider.configLogEnable()) {
-            val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            builder.addInterceptor(loggingInterceptor)
+            builder.addInterceptor(LoggingInterceptor.Builder()
+                    .loggable(BuildConfig.DEBUG)
+                    .setLevel(Level.BASIC)
+                    .log(Platform.INFO)
+                    .request("Request")
+                    .response("Response")
+                    .addHeader("header", "context")
+                    .build())
         }
 
         val interceptors = provider.configInterceptors()

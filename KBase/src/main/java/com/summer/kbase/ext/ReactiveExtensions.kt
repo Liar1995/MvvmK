@@ -78,9 +78,9 @@ fun <T> Observable<T>.performOnBack(scheduler: Scheduler): Observable<T> {
     return this.subscribeOn(scheduler.io())
 }
 
-fun <T> Observable<T>.execute(subscriber: BaseObserver<T>) {
-    this.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+fun <T> Observable<T>.execute(subscriber: BaseObserver<T>, scheduler: Scheduler) {
+    this.subscribeOn(scheduler.io())
+            .observeOn(scheduler.mainThread())
             .subscribe(subscriber)
 }
 

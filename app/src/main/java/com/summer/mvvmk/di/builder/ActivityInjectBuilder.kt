@@ -3,7 +3,7 @@ package com.summer.mvvmk.di.builder
 import com.summer.kbase.di.scope.ActivityScope
 import com.summer.mvvmk.di.module.KobeModule
 import com.summer.mvvmk.di.module.LoginVmModule
-import com.summer.mvvmk.ui.activity.LoginActivity
+import com.summer.mvvmk.ui.activity.DemoListActivity
 import com.summer.mvvmk.ui.activity.MainActivity
 import com.summer.mvvmk.ui.activity.TwoAct
 import dagger.Module
@@ -23,7 +23,7 @@ abstract class ActivityInjectBuilder {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [LoginVmModule::class])
-    abstract fun contributeLoginActivity(): LoginActivity
+    abstract fun contributeLoginActivity(): DemoListActivity
 
     @ActivityScope
     @ContributesAndroidInjector

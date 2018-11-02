@@ -12,6 +12,21 @@ import android.arch.lifecycle.OnLifecycleEvent
  */
 interface IBaseViewModel : LifecycleObserver {
 
+    /**
+     * 展示界面加载状态
+     */
+    fun showLoading()
+
+    /**
+     * 隐藏界面加载状态
+     */
+    fun hideLoading()
+
+    /**
+     * 展示错误信息（toast）
+     */
+    fun onError(message: String)
+
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
     fun onAny(owner: LifecycleOwner, event: Lifecycle.Event)
 

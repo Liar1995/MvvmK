@@ -17,7 +17,6 @@ package com.summer.kbase.base.net.livedata
 
 
 import android.arch.lifecycle.LiveData
-import com.summer.kbase.base.net.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback

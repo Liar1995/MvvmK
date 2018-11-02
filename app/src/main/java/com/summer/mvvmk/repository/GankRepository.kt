@@ -1,13 +1,19 @@
 package com.summer.mvvmk.repository
 
+import android.arch.lifecycle.LiveData
 import com.mpaani.core.networking.Outcome
-import com.summer.kbase.base.net.BaseResp
+import com.summer.kbase.base.net.livedata.ApiResponse
+import com.summer.kbase.base.net.livedata.AppExecutors
+import com.summer.kbase.base.net.livedata.NetworkBoundResource
+import com.summer.kbase.base.net.livedata.Resource
+import com.summer.kbase.base.net.livedata.AbsentLiveData
 import com.summer.kbase.base.rx.BaseSingleObserver
-import com.summer.kbase.common.LoggerUtils
 import com.summer.kbase.common.Scheduler
 import com.summer.kbase.ext.execute
+import com.summer.kbase.ext.loading
 import com.summer.kbase.ext.success
 import com.summer.mvvmk.data.protocol.CategoriesResp
+import com.summer.mvvmk.data.protocol.GankResp
 import com.summer.mvvmk.repository.api.GankDataContract
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
@@ -27,15 +33,34 @@ class GankRepository(
 
     override val commentsFetchOutcome: PublishSubject<Outcome<String>> = PublishSubject.create<Outcome<String>>()
 
+    val appExecutors: AppExecutors = AppExecutors()
+
+    //rxjava
     override fun getGankCategories() {
+        commentsFetchOutcome.loading(true)
         remote.getGankCategories().execute(object : BaseSingleObserver<CategoriesResp>(compositeDisposable) {
             override fun onSuccess(t: CategoriesResp) {
                 super.onSuccess(t)
-                commentsFetchOutcome.success("xxxx")
+                commentsFetchOutcome.success("login success")
+            }
+
+            override fun onError(e: Throwable) {
+                super.onError(e)
+                commentsFetchOutcome.success("login error")
             }
         }, scheduler)
     }
 
-    override fun getGankData() = remote.getGankData()
+    //livedata
+    override fun getGankData(): LiveData<Resource<GankResp>> {
+        return object : NetworkBoundResource<GankResp, GankResp>(appExecutors) {
+            override fun loadFromDb(): LiveData<GankResp> {
+                return  AbsentLiveData.create()
+            }
+            override fun createCall(): LiveData<ApiResponse<GankResp>> {
+                return remote.getGankData()
+            }
+        }.asLiveData()
+    }
 
 }

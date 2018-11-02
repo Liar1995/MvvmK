@@ -24,6 +24,10 @@ android {
     dataBinding {
         enabled true
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
 }
 
@@ -83,6 +87,9 @@ dependencies {
     api rootProject.ext.dependencies["persistentCookieJar"]
     //okhttp-logger
     api rootProject.ext.dependencies["okhttp-logger"]
+    //anko
+    api rootProject.ext.dependencies["ankoCommons"]
+    api rootProject.ext.dependencies["ankoCommonsSupport"]
 
 }
 repositories {

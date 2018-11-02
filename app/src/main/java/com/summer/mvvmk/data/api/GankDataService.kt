@@ -1,8 +1,7 @@
 package com.summer.mvvmk.data.api
 
 import android.arch.lifecycle.LiveData
-import com.summer.kbase.base.net.ApiResponse
-import com.summer.kbase.base.net.BaseResp
+import com.summer.kbase.base.net.livedata.ApiResponse
 import com.summer.mvvmk.data.protocol.CategoriesResp
 import com.summer.mvvmk.data.protocol.GankResp
 import io.reactivex.Single

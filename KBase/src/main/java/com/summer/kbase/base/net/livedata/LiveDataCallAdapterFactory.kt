@@ -17,7 +17,6 @@
 package com.summer.kbase.base.net.livedata
 
 import android.arch.lifecycle.LiveData
-import com.summer.kbase.base.net.ApiResponse
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 

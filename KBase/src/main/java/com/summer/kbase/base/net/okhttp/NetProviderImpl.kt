@@ -1,4 +1,4 @@
-package com.summer.kbase.base.net
+package com.summer.kbase.base.net.okhttp
 
 import android.content.Context
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
