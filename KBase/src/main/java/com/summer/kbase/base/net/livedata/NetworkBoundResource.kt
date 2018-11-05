@@ -27,23 +27,11 @@ constructor(private val appExecutors: AppExecutors) {
         //首先通知LiveData为加载中状态
         result.value = Resource.loading(null)
         val dbSource by lazy { loadFromDb() }
-//        result.addSource(dbSource) { data ->
-//            result.removeSource(dbSource)
-////            if (shouldFetch(data)) {
-//                fetchFromNetwork(dbSource)
-////            } else {
-////                result.addSource(dbSource) { newData -> result.setValue(Resource.success(newData)) }
-////            }
-//        }
         fetchFromNetwork(dbSource)
     }
 
     private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
         val apiResponse = createCall()
-        // we re-attach dbSource as a new source, it will dispatch its latest value quickly
-//        result.addSource(dbSource) {
-//            newData -> result.setValue(Resource.loading(newData))
-//        }
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
@@ -51,12 +39,7 @@ constructor(private val appExecutors: AppExecutors) {
             response.let {
                 if (it?.isSuccessful!!) {
                     appExecutors.diskIO.execute {
-                        //数据从网络获取后，储存本地
-                        //processResponse(it)?.let { requestType -> saveCallResult(requestType) }
                         appExecutors.mainThread.execute {
-                            // we specially request a new live data,
-                            // otherwise we will get immediately last cached value,
-                            // which may not be updated with latest results received from network.
                             result.addSource(loadFromDb()) {
                                 newData -> result.setValue(Resource.success(newData)) }
                         }

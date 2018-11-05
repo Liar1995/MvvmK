@@ -3,8 +3,10 @@ package com.summer.mvvmk.ui.vm
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import com.mpaani.core.networking.Outcome
 import com.summer.kbase.base.BaseViewModel
+import com.summer.kbase.base.net.livedata.FetchLiveData
 import com.summer.kbase.base.net.livedata.Resource
 import com.summer.kbase.binding.command.BindingAction
 import com.summer.kbase.binding.command.BindingCommand
@@ -23,7 +25,7 @@ class LoginViewModel(application: Application, private val repo: GankDataContrac
         repo.commentsFetchOutcome.toLiveData(compositeDisposable)
     }
 
-    var photoListLiveData: LiveData<Resource<GankResp>> = MutableLiveData()
+    var photoListLiveData: FetchLiveData<Resource<GankResp>> = FetchLiveData<Resource<GankResp>>().createSwitchMap { repo.getGankData() }
 
     var getDataByRxOnClickCommand = BindingCommand<Unit>(object : BindingAction {
         override fun call() {
@@ -31,15 +33,10 @@ class LoginViewModel(application: Application, private val repo: GankDataContrac
         }
     })
 
-
-    init {
-        photoListLiveData = repo.getGankData()
-    }
-
     var getDataByLiveDataOnClickCommand = BindingCommand<Unit>(object : BindingAction {
         override fun call() {
             //无参数请求
-            photoListLiveData = repo.getGankData()
+            photoListLiveData.trigger()
         }
     })
 
