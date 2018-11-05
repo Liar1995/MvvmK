@@ -41,9 +41,9 @@ constructor(private val appExecutors: AppExecutors) {
     private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
         val apiResponse = createCall()
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
-        result.addSource(dbSource) {
-            newData -> result.setValue(Resource.loading(newData))
-        }
+//        result.addSource(dbSource) {
+//            newData -> result.setValue(Resource.loading(newData))
+//        }
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)

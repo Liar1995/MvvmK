@@ -31,6 +31,11 @@ class LoginViewModel(application: Application, private val repo: GankDataContrac
         }
     })
 
+
+    init {
+        photoListLiveData = repo.getGankData()
+    }
+
     var getDataByLiveDataOnClickCommand = BindingCommand<Unit>(object : BindingAction {
         override fun call() {
             //无参数请求
