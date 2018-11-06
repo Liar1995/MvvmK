@@ -33,6 +33,7 @@ class GankRepository(
 
     override val commentsFetchOutcome: PublishSubject<Outcome<String>> = PublishSubject.create<Outcome<String>>()
 
+    //使用livedata事件流可使用dagger注入
     val appExecutors: AppExecutors = AppExecutors()
 
     //rxjava
@@ -55,8 +56,22 @@ class GankRepository(
     override fun getGankData(): LiveData<Resource<GankResp>> {
         return object : NetworkBoundResource<GankResp, GankResp>(appExecutors) {
             override fun loadFromDb(): LiveData<GankResp> {
-                return  AbsentLiveData.create()
+                return AbsentLiveData.create()
             }
+
+            override fun createCall(): LiveData<ApiResponse<GankResp>> {
+                return remote.getGankData()
+            }
+        }.asLiveData()
+    }
+
+    //blend
+    override fun getGankDataBlend(): LiveData<Resource<GankResp>> {
+        return object : NetworkBoundResource<GankResp, GankResp>(appExecutors) {
+            override fun loadFromDb(): LiveData<GankResp> {
+                return AbsentLiveData.create()
+            }
+
             override fun createCall(): LiveData<ApiResponse<GankResp>> {
                 return remote.getGankData()
             }

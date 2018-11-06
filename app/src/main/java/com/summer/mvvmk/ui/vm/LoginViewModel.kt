@@ -2,8 +2,8 @@ package com.summer.mvvmk.ui.vm
 
 import android.app.Application
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
+import android.databinding.ObservableInt
+import android.view.View
 import com.mpaani.core.networking.Outcome
 import com.summer.kbase.base.BaseViewModel
 import com.summer.kbase.base.net.livedata.FetchLiveData
@@ -21,11 +21,15 @@ import com.summer.mvvmk.repository.api.GankDataContract
  */
 class LoginViewModel(application: Application, private val repo: GankDataContract.Repository) : BaseViewModel(application) {
 
+    var progressBarStatus: ObservableInt = ObservableInt(View.GONE)
+
     val commentsOutcome: LiveData<Outcome<String>> by lazy {
         repo.commentsFetchOutcome.toLiveData(compositeDisposable)
     }
 
-    var photoListLiveData: FetchLiveData<Resource<GankResp>> = FetchLiveData<Resource<GankResp>>().createSwitchMap { repo.getGankData() }
+    var gankLiveData: FetchLiveData<Resource<GankResp>> = FetchLiveData<Resource<GankResp>>().createSwitchMap { repo.getGankData() }
+
+    var gankBlend: FetchLiveData<Resource<GankResp>> = FetchLiveData<Resource<GankResp>>().createSwitchMap { repo.getGankDataBlend() }
 
     var getDataByRxOnClickCommand = BindingCommand<Unit>(object : BindingAction {
         override fun call() {
@@ -36,7 +40,14 @@ class LoginViewModel(application: Application, private val repo: GankDataContrac
     var getDataByLiveDataOnClickCommand = BindingCommand<Unit>(object : BindingAction {
         override fun call() {
             //无参数请求
-            photoListLiveData.trigger()
+            gankLiveData.trigger()
+        }
+    })
+
+    var getDataByBlendOnClickCommand = BindingCommand<Unit>(object : BindingAction {
+        override fun call() {
+            //无参数请求
+            gankBlend.trigger()
         }
     })
 

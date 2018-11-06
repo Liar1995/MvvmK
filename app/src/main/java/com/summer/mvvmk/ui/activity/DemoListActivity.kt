@@ -3,10 +3,10 @@ package com.summer.mvvmk.ui.activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.View
 import com.mpaani.core.networking.Outcome
 import com.summer.kbase.base.BaseActivityByCustomFactory
 import com.summer.kbase.base.net.livedata.Status
-import com.summer.kbase.ext.observe
 import com.summer.mvvmk.BR
 import com.summer.mvvmk.R
 import com.summer.mvvmk.databinding.ActivityDemoListBinding
@@ -40,18 +40,40 @@ class DemoListActivity : BaseActivityByCustomFactory<ActivityDemoListBinding, Lo
                 //rx事件流
                 commentsOutcome.observe(this@DemoListActivity, Observer { it ->
                     when (it) {
-                        is Outcome.Progress -> isShowLoading(it.loading)
+                        is Outcome.Progress -> {
+                            if (it.loading)
+                                progressBarStatus.set(View.VISIBLE)
+                            else
+                                progressBarStatus.set(View.GONE)
+                        }
                         is Outcome.Success -> toast(it.data)
                         is Outcome.Failure -> toast(it.e.message.toString())
                     }
                 })
 
                 //livedata 事件流
-                photoListLiveData.observe(this@DemoListActivity, Observer {
+                gankLiveData.observe(this@DemoListActivity, Observer {
                     when (it?.status) {
-                        Status.SUCCESS -> toast("livedata 事件流 SUCCESS")
+                        Status.SUCCESS -> {
+                            toast("livedata 事件流 SUCCESS")
+                            progressBarStatus.set(View.GONE)
+                        }
                         Status.ERROR -> toast("livedata 事件流 ERROR")
-                        Status.LOADING -> toast("livedata 事件流 LOADING")
+                        Status.LOADING ->
+                            progressBarStatus.set(View.VISIBLE)
+                    }
+                })
+
+                //blend
+                gankBlend.observe(this@DemoListActivity, Observer {
+                    when (it?.status) {
+                        Status.SUCCESS -> {
+                            toast("blend 事件流 SUCCESS")
+                            progressBarStatus.set(View.GONE)
+                        }
+                        Status.ERROR -> toast("blend 事件流 ERROR")
+                        Status.LOADING ->
+                            progressBarStatus.set(View.VISIBLE)
                     }
                 })
             }

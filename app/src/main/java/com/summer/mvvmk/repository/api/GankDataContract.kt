@@ -19,6 +19,7 @@ object GankDataContract {
     //定义该Repository的逻辑操作
     interface Repository {
         fun getGankData(): LiveData<Resource<GankResp>>
+        fun getGankDataBlend(): LiveData<Resource<GankResp>>
         fun getGankCategories()
         val commentsFetchOutcome: PublishSubject<Outcome<String>>
     }
@@ -26,6 +27,7 @@ object GankDataContract {
     //network api return type from retrofit return type
     interface Remote {
         fun getGankData(): LiveData<ApiResponse<GankResp>>
+        fun getGankDataBlend(): LiveData<ApiResponse<GankResp>>
         fun getGankCategories(): Single<CategoriesResp>
     }
 

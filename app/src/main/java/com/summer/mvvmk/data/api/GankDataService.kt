@@ -20,4 +20,7 @@ interface GankDataService {
     @GET("/api/xiandu/categories")
     fun getGankCategories(): Single<CategoriesResp>
 
+    @GET("/api/data/Android/10/1")
+    fun getGankDataBlend(): Single<ApiResponse<GankResp>>
+
 }

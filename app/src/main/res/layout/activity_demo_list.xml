@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:binding="http://schemas.android.com/apk/res-auto">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
 
@@ -9,28 +10,53 @@
             type="com.summer.mvvmk.ui.vm.LoginViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btn_get_by_rx"
-            onClickCommand="@{viewModel.getDataByRxOnClickCommand}"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="模拟登录获取数据(Rx事件流)" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_get_by_livedata"
-            onClickCommand="@{viewModel.getDataByLiveDataOnClickCommand}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="模拟登录获取数据(LiveData事件流)" />
+            <Button
+                android:id="@+id/btn_get_by_rx"
+                onClickCommand="@{viewModel.getDataByRxOnClickCommand}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="模拟获取数据(Rx事件流)" />
 
-        <TextView
-            android:id="@+id/txt_data"
+            <Button
+                android:id="@+id/btn_get_by_livedata"
+                onClickCommand="@{viewModel.getDataByLiveDataOnClickCommand}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="模拟获取数据(LiveData事件流)" />
+
+            <Button
+                android:id="@+id/btn_get_by_blend"
+                onClickCommand="@{viewModel.getDataByBlendOnClickCommand}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="模拟获取数据(LiveData*rxjava混合事件流)" />
+
+        </LinearLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{viewModel.progressBarStatus}"
+                />
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
 </layout>
