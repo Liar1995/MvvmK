@@ -48,8 +48,8 @@ ext {
             //databinding
             "databinding-compiler"                 : "com.android.databinding:compiler:3.0.0",
             //glide图片加载
-            "glide"                                : "com.github.bumptech.glide:glide:4.6.1",
-            "glide-compiler"                       : "com.github.bumptech.glide:compiler:4.6.1",
+            "glide"                                : "com.github.bumptech.glide:glide:4.8.0",
+            "glide-compiler"                       : "com.github.bumptech.glide:compiler:4.8.0",
             //json解析
             "gson"                                 : "com.google.code.gson:gson:2.8.2",
             //65535

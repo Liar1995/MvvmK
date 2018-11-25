@@ -58,7 +58,7 @@ dependencies {
     api rootProject.ext.dependencies.gson
     //glide图片加载库
     api rootProject.ext.dependencies.glide
-    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    kapt rootProject.ext.dependencies["glide-compiler"]
     //recyclerview的databinding套装
     api rootProject.ext.dependencies.bindingcollectionadapter
     api rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]
